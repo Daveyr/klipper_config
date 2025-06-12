@@ -2,6 +2,7 @@
 host = 0.0.0.0
 port = 7125
 max_upload_size = 1024
+klippy_uds_address = ~/printer_data/comms/klippy.sock
 
 [file_manager]
 enable_object_processing = False
@@ -46,9 +47,22 @@ path = ~/fluidd
 [update_manager KlipperScreen]
 type = git_repo
 path = ~/KlipperScreen
-origin = https://github.com/jordanruthe/KlipperScreen.git
-env = ~/.KlipperScreen-env/bin/python
+origin = https://github.com/KlipperScreen/KlipperScreen.git
+virtualenv = ~/.KlipperScreen-env
 requirements = scripts/KlipperScreen-requirements.txt
-install_script = scripts/KlipperScreen-install.sh
+system_dependencies = scripts/system-dependencies.json
 managed_services = KlipperScreen
+
+[update_manager mainsail-config]
+type = git_repo
+primary_branch = master
+path = ~/mainsail-config
+origin = https://github.com/mainsail-crew/mainsail-config.git
+managed_services = klipper
+
+[update_manager mainsail]
+type = web
+channel = stable
+repo = mainsail-crew/mainsail
+path = ~/mainsail
 
